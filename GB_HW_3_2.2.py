@@ -3,75 +3,131 @@
 должна принимать параметры как именованные аргументы. Осуществить вывод данных о
 пользователе одной строкой.
 '''
+from typing import Optional
 
 
-def print_identity(surname=None, name=None, birth_date=None, place_of_living=None, phone_number=None, email=None):
-    print(
-        f'\nThe person name is {name} \nand his surname is {surname}, \nhe/she was born in {birth_date}, \nfor now hi/she is living in {place_of_living}, \nhere is his/her contact information, \nphone number is {phone_number} \nand email is {email}')
-    pass
+def print_identity(
+        surname: Optional[str] = None,
+        name: Optional[str] = None,
+        birth_date: Optional[str] = None,
+        place_of_living: Optional[str] = None,
+        phone_number: Optional[str] = None,
+        email: Optional[str] = None
+        ) -> None:
+    return (
+        f'\nThe person name is {name} '
+        f'\nand his surname is {surname}, '
+        f'\nhe/she was born in {birth_date}, '
+        f'\nfor now hi/she is living in {place_of_living}, '
+        f'\nhere is his/her contact information, '
+        f'\nphone number is {phone_number} '
+        f'\nand email is {email}'
+        )
 
 
-print_identity(name='Vova', surname='Petrov', birth_date='01.10.1987', phone_number='+4423459854',
-               place_of_living='London', email='tut@gmail.com')
 
-def check_for_letters():
-    pass
+print(print_identity(
+        name='Vova',
+        surname='Petrov',
+        birth_date='01.10.1987',
+        phone_number='+4423459854',
+        place_of_living='London',
+        email='tut@gmail.com'
+        ))
 
 
-while True:
-    enter_name = str(input(f'\nPlease enter customer first name: '))
-    if enter_name.isalpha() == True:
-        break
-    else:
-        print(f'\nYou are entered not letters, try to enter first name again: ')
-        continue
+def check_for_letters(
+        input_question: Optional[str] = None,
+        repeat_question: Optional[str] = None
+        ) -> str:
+    while True:
+        user_input = str(input(f'\n{input_question}'))
+        if user_input.isalpha():
+            return user_input
+        else:
+            print(f'\n{repeat_question}')
+            continue
 
-while True:
-    enter_surname = str(input(f'\nPlease enter customer first surname: '))
-    if enter_surname.isalpha() == True:
-        break
-    else:
-        print(f'\nYou are entered not letters, try to enter surname again: ')
-        continue
+
+enter_name = check_for_letters(
+    input_question = 'Enter the first name: ',
+    repeat_question = 'You are entered not letters, try to enter first name again'
+    )
+
+enter_surname = check_for_letters(
+    input_question = 'Please enter customer surname: ',
+    repeat_question = 'You are entered not letters, try to enter surname again')
+
+enter_place_of_living = check_for_letters(
+    input_question = 'Please enter customer place of living: ',
+    repeat_question = 'You are entered not letters, try to enter place of living again')
 
 from datetime import datetime
 
-while True:
-    enter_birth_date = str(input(f'\nPlease enter customer birth_date in folowing format - dd.mm.yyyy: '))
-    try:
-        datetime.strptime(enter_birth_date, '%d.%m.%Y')
-        break
-    except ValueError:
-        print(f'\nYou are entered not date, please enter date in folowing format - dd.mm.yyyy: ')
 
-import re
+def check_date(
+        input_question: Optional[str] = None,
+        repeat_question: Optional[str] = None
+        ) -> str:
+    while True:
+        birth_date = str(input(f'\n{input_question}'))
+        try:
+            datetime.strptime(birth_date, '%d.%m.%Y')
+            return birth_date
+        except (ValueError, TypeError):
+            print(f'\n{repeat_question}')
+            continue
 
-while True:
-    enter_phone_number = input(f'\nPlease enter phone number in folowing format - +xxxxxxxxxx\n(+, country code, phone number with no dash, dots, spaces, slash): ')
-    if re.fullmatch(r'\+?\d{7,15}', enter_phone_number) != None:
-        break
-    else:
-        print(f'\nYou are entered not phone number, please enter phone number in folowing format - +xxxxxxxxxx: ')
-        continue
 
-while True:
-    enter_place_of_living = str(input(f'\nPlease enter customer place_of_living: '))
-    if enter_place_of_living.isalpha() == True:
-        break
-    else:
-        print(f'\nYou are entered not letters, try to enter place of living again: ')
-        continue
-
+birth_date = check_date(
+    input_question = 'Please enter customer birth_date in following format - dd.mm.yyyy: ',
+    repeat_question = 'You are entered not date, please enter date in following format - dd.mm.yyyy: ')
 
 from email_validator import validate_email, EmailNotValidError
 
-while True:
-    enter_email = str(input(f'\nPlease enter customer email: '))
-    try:
-        email_check = validate_email(enter_email, check_deliverability=False)
-        break
-    except EmailNotValidError:
-        print(f'\nYou are entered not email, please enter email: ')
 
-print_identity(name=enter_name, surname=enter_surname, birth_date=enter_birth_date, phone_number=enter_phone_number,
-               place_of_living=enter_place_of_living, email=enter_email)
+def check_email(
+        input_question: Optional[str] = None,
+        repeat_question: Optional[str] = None
+        ) -> str:
+    while True:
+        customer_email = input(f'\n{input_question}')
+        try:
+            email_check = validate_email(customer_email, check_deliverability=False)
+            return customer_email
+        except EmailNotValidError:
+            print(f'\n{repeat_question}')
+
+
+customer_email = check_email(
+    input_question = 'Please enter customer email: ',
+    repeat_question = 'you are entered not email, please enter email: ')
+
+import re
+
+
+def check_phone_number(
+        input_question: Optional[str] = None,
+        repeat_question: Optional[str] = None
+        ) -> str:
+    while True:
+        enter_phone_number = input(f'\n{input_question}')
+        if re.fullmatch(r'\+?\d{7,15}', enter_phone_number) != None:
+            return enter_phone_number
+        else:
+            print(f'\n{repeat_question}')
+            continue
+
+
+customer_phone_number = check_phone_number(
+    input_question = 'Please enter phone number in following format - +xxxxxxxxxx\n(+, country code, phone number with no dash, dots, spaces, slash): ',
+    repeat_question = 'You are entered not phone number, please enter phone number in following format - +xxxxxxxxxx: ')
+
+print(print_identity(
+    surname = enter_surname,
+    name = enter_name,
+    birth_date = birth_date,
+    place_of_living = enter_place_of_living,
+    phone_number = customer_phone_number,
+    email = customer_email
+    ))
