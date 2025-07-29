@@ -3,7 +3,10 @@
 должна принимать параметры как именованные аргументы. Осуществить вывод данных о
 пользователе одной строкой.
 '''
-from typing import Optional
+from typing import Optional, Callable
+from datetime import datetime
+from email_validator import validate_email, EmailNotValidError
+import re
 
 
 def print_identity(
@@ -24,107 +27,80 @@ def print_identity(
         f'\nand email is {email}'
         )
 
-
-
-print(print_identity(
-        name='Vova',
-        surname='Petrov',
-        birth_date='01.10.1987',
-        phone_number='+4423459854',
-        place_of_living='London',
-        email='tut@gmail.com'
-        ))
-
-def grand_validator():
-
-    pass
-
-
-def check_for_letters(
-        input_question: Optional[str] = None,
-        repeat_question: Optional[str] = None
-        ) -> str:
+def input_output_for_validators(
+        input_prompt: Optional[str],
+        error_prompt: Optional[str],
+        validator_func: Callable[[str],bool]
+        ):
     while True:
-        user_input = str(input(f'\n{input_question}'))
-        if user_input.isalpha():
+        user_input = input(f'\n{input_prompt}')
+        if validator_func(user_input):
             return user_input
-        else:
-            print(f'\n{repeat_question}')
-            continue
+        print(f'\n{error_prompt}')
 
 
-enter_name = check_for_letters(
-    input_question = 'Enter the first name: ',
-    repeat_question = 'You are entered not letters, try to enter first name again'
+def is_alpha(value: str) -> bool:
+   return value.isalpha()
+
+def check_date(value: str)-> bool:
+    while True:
+        try:
+            datetime.strptime(value, '%d.%m.%Y')
+            return True
+        except (ValueError, TypeError):
+            return False
+
+def check_email(value: str)-> bool:
+    try:
+        validate_email(value, check_deliverability=False)
+        return True
+    except EmailNotValidError:
+        return False
+
+def check_phone_number(value: str)-> bool:
+    if re.fullmatch(r'\+?\d{7,15}', value) != None:
+        return True
+    else:
+        return False
+
+
+enter_name = input_output_for_validators(
+    'Enter the first name: ',
+    'You are entered not letters, try to enter first name again',
+    is_alpha
     )
 
-enter_surname = check_for_letters(
-    input_question = 'Please enter customer surname: ',
-    repeat_question = 'You are entered not letters, try to enter surname again')
+enter_surname = input_output_for_validators(
+    'Please enter customer surname: ',
+    'You are entered not letters, try to enter surname again',
+    is_alpha
+    )
 
-enter_place_of_living = check_for_letters(
-    input_question = 'Please enter customer place of living: ',
-    repeat_question = 'You are entered not letters, try to enter place of living again')
-
-from datetime import datetime
-
-def check_date(
-        input_question: Optional[str] = None,
-        repeat_question: Optional[str] = None
-        ) -> str:
-    while True:
-        birth_date = str(input(f'\n{input_question}'))
-        try:
-            datetime.strptime(birth_date, '%d.%m.%Y')
-            return birth_date
-        except (ValueError, TypeError):
-            print(f'\n{repeat_question}')
-            continue
+enter_place_of_living = input_output_for_validators(
+    'Please enter customer place of living: ',
+    'You are entered not letters, try to enter place of living again',
+    is_alpha
+    )
 
 
-birth_date = check_date(
-    input_question = 'Please enter customer birth_date in following format - dd.mm.yyyy: ',
-    repeat_question = 'You are entered not date, please enter date in following format - dd.mm.yyyy: ')
-
-from email_validator import validate_email, EmailNotValidError
-
-
-def check_email(
-        input_question: Optional[str] = None,
-        repeat_question: Optional[str] = None
-        ) -> str:
-    while True:
-        customer_email = input(f'\n{input_question}')
-        try:
-            email_check = validate_email(customer_email, check_deliverability=False)
-            return customer_email
-        except EmailNotValidError:
-            print(f'\n{repeat_question}')
+birth_date = input_output_for_validators(
+    'Please enter customer birth_date in following format - dd.mm.yyyy: ',
+    'You are entered not date, please enter date in following format - dd.mm.yyyy: ',
+    check_date
+    )
 
 
-customer_email = check_email(
-    input_question = 'Please enter customer email: ',
-    repeat_question = 'you are entered not email, please enter email: ')
+customer_email = input_output_for_validators(
+    'Please enter customer email: ',
+    'you are entered not email, please enter email: ',
+    check_email
+    )
 
-import re
-
-
-def check_phone_number(
-        input_question: Optional[str] = None,
-        repeat_question: Optional[str] = None
-        ) -> str:
-    while True:
-        enter_phone_number = input(f'\n{input_question}')
-        if re.fullmatch(r'\+?\d{7,15}', enter_phone_number) != None:
-            return enter_phone_number
-        else:
-            print(f'\n{repeat_question}')
-            continue
-
-
-customer_phone_number = check_phone_number(
-    input_question = 'Please enter phone number in following format - +xxxxxxxxxx\n(+, country code, phone number with no dash, dots, spaces, slash): ',
-    repeat_question = 'You are entered not phone number, please enter phone number in following format - +xxxxxxxxxx: ')
+customer_phone_number = input_output_for_validators(
+    'Please enter phone number in following format - +xxxxxxxxxx\n(+, country code, phone number with no dash, dots, spaces, slash): ',
+    'You are entered not phone number, please enter phone number in following format - +xxxxxxxxxx: ',
+    check_phone_number
+    )
 
 print(print_identity(
     surname = enter_surname,
