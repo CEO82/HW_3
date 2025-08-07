@@ -30,4 +30,4 @@ def get_string(input_str: str)-> list:
                      f'\nIf you want finish the program please enter symbol ~ '
                      f'\nIf you will input numbers and at the end you will put symbol ~ , program will do last calculation and be closed after it')
 
-    pass
+
