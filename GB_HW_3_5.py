@@ -14,6 +14,7 @@ def sum_func(lst_for_sum: str)-> float:
     return sum(lst_for_sum)
 
 def make_list_of_floats(user_list: list)-> list:
+    '''This function should check that list contain any number/s if it does not make aalert and reqest another list. '''
     for n in user_list:
         if n
     pass
