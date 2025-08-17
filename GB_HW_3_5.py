@@ -14,10 +14,15 @@ def sum_func(lst_for_sum: str)-> float:
     return sum(lst_for_sum)
 
 def make_list_of_floats(user_list: list)-> list:
-    '''This function should check that list contain any number/s if it does not make aalert and reqest another list. '''
-    for n in user_list:
-        if n
-    pass
+    '''
+    This function should check that list contain any number/s if it does not, return marker 'no digits', if it contain digits return list only with numbers.
+    '''
+    num_list = [n for n in user_list if isinstance(n, (int, float))]
+    if num_list == []:
+        return ['no digits']
+    else:
+        return num_list
+
 
 def go_stop_check(check_lst: list)-> str:
     '''Function checking rights to continue program'''
@@ -29,13 +34,19 @@ def go_stop_check(check_lst: list)-> str:
         return 'continue'
 
 def get_string()-> list:
-    '''Function that ask user to input numbers separated by spaces, checking this string for numbers or special symbol ~, if no numbers or symbol ~ than function will ask to enter input again, if input valid return list with numbers and symbol ~ if present '''
+    '''Function that ask user to input numbers separated by spaces and return list of entered elements '''
     user_str = input(f''
                      f'\nPlease enter only numbers separated by spaces,'
                      f'\nIf you want finish the program please enter only symbol ~ '
                      f'\nIf you will input numbers and at the end you will put symbol ~ , program will do last calculation and be finished after it')
     return user_str.split()
 
+def main_func():
+    
+    pass
 
 
+if __name__ == '__main__':
+
+    print(main_func())
 
