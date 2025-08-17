@@ -10,24 +10,31 @@ Enter должна выводиться сумма чисел. Пользова�
 if __name__ != '__main__':
     print(f'\nThis file is not for import!!!')
 
-def sum_func(some_str: str):
+def sum_func(lst_for_sum: str)-> float:
+    return sum(lst_for_sum)
 
+def make_list_of_floats(user_list: list)-> list:
+    for n in user_list:
+        if n
     pass
 
-def go_stop_check(check_str: str)-> str:
+def go_stop_check(check_lst: list)-> str:
     '''Function checking rights to continue program'''
-    if check_str == '~':
+    if check_lst == '~':
         return 'hard_stop'
-    elif check_str[-1] == '~':
+    elif check_lst[-1] == '~':
         return 'sum_and_stop'
     else:
         return 'continue'
 
-def get_string(input_str: str)-> list:
+def get_string()-> list:
     '''Function that ask user to input numbers separated by spaces, checking this string for numbers or special symbol ~, if no numbers or symbol ~ than function will ask to enter input again, if input valid return list with numbers and symbol ~ if present '''
     user_str = input(f''
-                     f'\nIf you want enter only numbers separated by spaces,'
-                     f'\nIf you want finish the program please enter symbol ~ '
-                     f'\nIf you will input numbers and at the end you will put symbol ~ , program will do last calculation and be closed after it')
+                     f'\nPlease enter only numbers separated by spaces,'
+                     f'\nIf you want finish the program please enter only symbol ~ '
+                     f'\nIf you will input numbers and at the end you will put symbol ~ , program will do last calculation and be finished after it')
+    return user_str.split()
+
+
 
 
