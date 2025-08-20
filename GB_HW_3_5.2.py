@@ -7,7 +7,13 @@ Enter должна выводиться сумма чисел. Пользова�
 этих чисел к полученной ранее сумме и после этого завершить программу.
 '''
 
+'''special symbol will be ~'''
+
 if __name__ != '__main__':
     print(f'\nThis file is not for import!!!')
+
+def input(command):
+    '''Function will recive command which type of input to do '''
+
 
 
