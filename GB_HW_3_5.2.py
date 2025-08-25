@@ -45,19 +45,29 @@ def take_input():
             continue
 
 def check_and_summ():
-    '''Description'''
-    lst_fr_chk_sum = take_input()
-    num_summ = 0.0
-    if lst_fr_chk_sum[0] == '~' and len(lst_fr_chk_sum) == 1:
-        return print(f'\nProgram finished'
-                     f'\nsumm of numbers = {num_summ}')
-    elif lst_fr_chk_sum[0] == '~' and len(lst_fr_chk_sum) > 1:
+    '''Function take input from take_input() function and check it for rights to do summ, do summ and finish program or just finish program'''
 
-        pass
+    num_summ = 0.0
+
+    while True:
+        lst_fr_chk_sum = take_input()
+        if lst_fr_chk_sum[0] == '~' and len(lst_fr_chk_sum) == 1:
+            return print(f'\nProgram finished'
+                         f'\nsumm of numbers = {num_summ}')
+        elif lst_fr_chk_sum[0] == '~' and len(lst_fr_chk_sum) > 1:
+            num_summ = num_summ + sum(lst_fr_chk_sum[1:])
+            return print(f'\nProgram finished'
+                         f'\nsumm of numbers = {num_summ}')
+        else:
+            num_summ = num_summ + sum(lst_fr_chk_sum)
+            print(f'\nCurrent summ = {num_summ}')
+            continue
+
+
 
 
 
 if __name__ == '__main__':
-    '''print(take_input())'''
+
     check_and_summ()
 
