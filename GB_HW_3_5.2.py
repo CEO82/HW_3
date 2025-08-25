@@ -13,16 +13,20 @@ if __name__ != '__main__':
     print(f'\nThis file is not for import!!!')
 
 def take_input():
-    '''Function will take input from user and check it for "~". if input does not have ~ or numbers it will ask another input, if input does not have ~ but have numbers -> create list of numbers (float) and send signal to continue program, if it has no numbers but have ~ any where in input it send signal to finish program, if input have, if input has numbers and ~ any where it will create list of numbers and signal do summ and finish program '''
+    '''Function will take input from user if user string contain numbers or/and symbol "~" it will create list of float numbers if it does not contain numbers or/and "~" it will create list of float numbers where "~" is the first symbol'''
     while True:
 
         user_str = input(f'\nPlease enter numbers separated by space'
-                         f'\nIf you wont to finish program plese enter "~": ')
+                         f'\nIf you want to finish program please enter "~": ')
         signal = 'continue'
         user_lst = user_str.split()
         number_lst = []
 
+        if user_str.count('~') >= 1:
+            number_lst.insert(0, '~')
+
         for s in user_lst:
+
             try:
                 float(s)
                 number_lst.append(float(s))
@@ -30,13 +34,14 @@ def take_input():
             except ValueError:
 
                 pass
-            if s == '~':
-                number_lst.insert(0, '~')
+            '''if s == '~':
+                number_lst.insert(0, '~')'''
 
         if len(number_lst) > 0:
             return number_lst
         else:
-            print(f"\nYou are entered wrong value, please repeat enter prepper value")
+            print(f"\nYou are entered wrong value, please repeat input"
+                  f"\nand enter proper value")
             continue
 
 
