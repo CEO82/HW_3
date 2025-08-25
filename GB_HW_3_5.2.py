@@ -13,7 +13,7 @@ if __name__ != '__main__':
     print(f'\nThis file is not for import!!!')
 
 def take_input():
-    '''Function will take input from user if user string contain numbers or/and symbol "~" it will create list of float numbers if it does not contain numbers or/and "~" it will create list of float numbers where "~" is the first symbol'''
+    '''Function will take input from user if user string contain numbers or/and symbol "~" it will create list of float numbers where "~" is the first symbol, if i contain numbers with out ~ it will create lift of float numbers, if it does not contain numbers or/and "~" it will ask input again '''
     while True:
 
         user_str = input(f'\nPlease enter numbers separated by space'
@@ -32,7 +32,6 @@ def take_input():
                 number_lst.append(float(s))
 
             except ValueError:
-
                 pass
             '''if s == '~':
                 number_lst.insert(0, '~')'''
@@ -41,10 +40,24 @@ def take_input():
             return number_lst
         else:
             print(f"\nYou are entered wrong value, please repeat input"
-                  f"\nand enter proper value")
+                  f"\nand enter proper value"
+                  f"\nor for finish program enter ~ ")
             continue
+
+def check_and_summ():
+    '''Description'''
+    lst_fr_chk_sum = take_input()
+    num_summ = 0.0
+    if lst_fr_chk_sum[0] == '~' and len(lst_fr_chk_sum) == 1:
+        return print(f'\nProgram finished'
+                     f'\nsumm of numbers = {num_summ}')
+    elif lst_fr_chk_sum[0] == '~' and len(lst_fr_chk_sum) > 1:
+
+        pass
+
 
 
 if __name__ == '__main__':
-    print(take_input())
+    '''print(take_input())'''
+    check_and_summ()
 
