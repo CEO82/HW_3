@@ -13,7 +13,7 @@ import re
 def int_func(user_str):
     '''This function request string from take_input() function and make this string title'''
     new_str = user_str
-    return new_str.title()
+    return ' '.join(word.capitalize() for word in user_str.split())
 
 
 
@@ -22,7 +22,7 @@ def take_input():
     while True:
         user_input = input(f'\nPlease enter several words using by Latin letters'
                            f'\n separated by spaces, but no other symbols: ')
-        if re.fullmatch(r'[A-Za-z ]+', user_input):
+        if re.fullmatch(r'[A-Za-z]+( [A-Za-z]+)*', user_input):
             return user_input
         else:
             print(f'\nYou are entered wrong value, please repeat enter ')

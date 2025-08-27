@@ -22,7 +22,7 @@ def take_input():
     while True:
         user_input = input(f'\nPlease enter several words using by Latin letters'
                            f'\n separated by spaces, but no other symbols: ')
-        if re.fullmatch(r'[A-Za-z ]+', user_input):
+        if re.fullmatch(r'[A-Za-z]+( [A-Za-z]+)*', user_input):
             return user_input
         else:
             print(f'\nYou are entered wrong value, please repeat enter ')
