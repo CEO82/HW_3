@@ -57,7 +57,7 @@ if __name__ == '__main__':
                                 f'\nas example'
                                 f'\n5 + 3: ')
 
-            if re.fullmatch(r'[0-9-] [*+-/] [0-9-]', user_string):
+            if re.fullmatch(r'[0-9-]* [*+-/] [0-9-]*', user_string):
                 return user_string
             elif user_string.lower() == 'exit':
                 print(f'\nProgram finished.')
@@ -65,7 +65,32 @@ if __name__ == '__main__':
             else:
                 print(f'\nYou are entered something wrong, please try again')
 
+    def make_list(user_string: str)-> list:
+        ''' description '''
+        user_list = user_string.split()
+        try:
+            check1 = float(user_list[0])
+            check_1 = 'good'
+        except ValueError:
+            check_1 = 'bad'
 
+        try:
+            check2 = float(user_list[2])
+            check_2 = 'good'
+        except ValueError:
+            check_2 = 'bad'
+
+        if check_1 and check_2 == 'good':
+            return user_list
+        else:
+            print(f'\nYou are entered something wrong, please try again')
+            user_input()
+
+
+
+
+
+    print(user_input())
 
 
 
