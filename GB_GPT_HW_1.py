@@ -28,6 +28,7 @@ o	неизвестная операция.
 5.	Нельзя использовать eval() и exec() — нужно написать логику самому.
 '''
 import operator
+import  re
 
 if __name__ != '__main__':
     print(f'\nThis file not for import!!!')
@@ -35,7 +36,7 @@ if __name__ != '__main__':
 if __name__ == '__main__':
 
     def operations(user_lst: list)-> float:
-        ''' func review '''
+        ''' func receives list with three symbols - first symbol is first number, second is operator and third is second number. As result function return result of operation with thous numbers according to second symbol '''
 
         operator_list = {
             '+': operator.add,
@@ -46,6 +47,25 @@ if __name__ == '__main__':
         }
 
         return float(operator_list[user_lst[1]](user_lst[0], user_lst[2]))
+
+    def user_input():
+        ''' description '''
+
+        while True:
+            user_string = input(f'\nPlease enter expression in format:'
+                                f'\nnumber space operator space number,'
+                                f'\nas example'
+                                f'\n5 + 3: ')
+
+            if re.fullmatch(r'[0-9-] [*+-/] [0-9-]', user_string):
+                return user_string
+            elif user_string.lower() == 'exit':
+                print(f'\nProgram finished.')
+                break
+            else:
+                print(f'\nYou are entered something wrong, please try again')
+
+
 
 
 
