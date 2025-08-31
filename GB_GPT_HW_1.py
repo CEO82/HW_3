@@ -27,4 +27,27 @@ o	неизвестная операция.
 4.	Работает в цикле, выход по exit.
 5.	Нельзя использовать eval() и exec() — нужно написать логику самому.
 '''
+import operator
+
+if __name__ != '__main__':
+    print(f'\nThis file not for import!!!')
+
+if __name__ == '__main__':
+
+    def operations(user_lst: list)-> float:
+        ''' func review '''
+
+        operator_list = {
+            '+': operator.add,
+            '-': operator.sub,
+            '*': operator.mul,
+            '/': operator.truediv,
+            '**': operator.pow,
+        }
+
+        return float(operator_list[user_lst[1]](user_lst[0], user_lst[2]))
+
+
+
+
 
