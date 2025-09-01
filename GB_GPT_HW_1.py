@@ -49,7 +49,7 @@ if __name__ == '__main__':
         return float(operator_list[user_lst[1]](user_lst[0], user_lst[2]))
 
     def user_input():
-        ''' description '''
+        ''' This function take input from user, check it for correct format and for stop word "exit". If user string format correct, then return user string, if not check for stop word if user string contain only stop word in any register program will stop, if not it wil ask to repeat input again  '''
 
         while True:
             user_string = input(f'\nPlease enter expression in format:'
@@ -66,21 +66,23 @@ if __name__ == '__main__':
                 print(f'\nYou are entered something wrong, please try again')
 
     def make_list(user_string: str)-> list:
-        ''' description '''
+        ''' This function receives string (supposed from user_input() function) in following format: number space operator symbol space number and make from it list of three position. Next it will check that positions 1 and 3 are numbers, if not call back  user_input() function, if there are numbers it wil create list in format [float, operator symbol, float] and return it'''
         user_list = user_string.split()
         try:
-            check1 = float(user_list[0])
+            'check1 = float(user_list[0])'
+            n1 = float(user_list[0])
             check_1 = 'good'
         except ValueError:
             check_1 = 'bad'
 
         try:
-            check2 = float(user_list[2])
+            'check2 = float(user_list[2])'
+            n2 = float(user_list[2])
             check_2 = 'good'
         except ValueError:
             check_2 = 'bad'
 
-        if check_1 and check_2 == 'good':
+        if check_1 == 'good' and check_2 == 'good':
             user_list.pop(0)
             user_list.insert(0, n1)
             user_list.pop(2)
@@ -94,8 +96,7 @@ if __name__ == '__main__':
 
 
 
-
-    print(user_input())
+    print(operations(make_list(user_input())))
 
 
 
