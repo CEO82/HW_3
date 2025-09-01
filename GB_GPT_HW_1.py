@@ -81,6 +81,11 @@ if __name__ == '__main__':
             check_2 = 'bad'
 
         if check_1 and check_2 == 'good':
+            user_list.pop(0)
+            user_list.insert(0, n1)
+            user_list.pop(2)
+            user_list.insert(2, n2)
+
             return user_list
         else:
             print(f'\nYou are entered something wrong, please try again')
