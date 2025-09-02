@@ -60,8 +60,8 @@ if __name__ == '__main__':
             if re.fullmatch(r'[0-9-]* [*+-/] [0-9-]*', user_string):
                 return user_string
             elif user_string.lower() == 'exit':
-                print(f'\nProgram finished.')
-                break
+                return 'exit'
+
             else:
                 print(f'\nYou are entered something wrong, please try again')
 
@@ -91,12 +91,25 @@ if __name__ == '__main__':
             return user_list
         else:
             print(f'\nYou are entered something wrong, please try again')
-            user_input()
+            return 'false_list'
+
+
+    while True:
+
+        user_string = user_input()
+        if user_string == 'exit':
+            print(f'\nProgram finished')
+            break
+        else:
+            user_list = make_list(user_string)
+            if user_list == 'false_list':
+                continue
+            else:
+                print(operations(user_list))
 
 
 
 
-    print(operations(make_list(user_input())))
 
 
 
