@@ -69,14 +69,12 @@ if __name__ == '__main__':
         ''' This function receives string (supposed from user_input() function) in following format: number space operator symbol space number and make from it list of three position. Next it will check that positions 1 and 3 are numbers, if not call back  user_input() function, if there are numbers it wil create list in format [float, operator symbol, float] and return it'''
         user_list = user_string.split()
         try:
-            'check1 = float(user_list[0])'
             n1 = float(user_list[0])
             check_1 = 'good'
         except ValueError:
             check_1 = 'bad'
 
         try:
-            'check2 = float(user_list[2])'
             n2 = float(user_list[2])
             check_2 = 'good'
         except ValueError:
