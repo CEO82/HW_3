@@ -48,8 +48,15 @@ if __name__ == '__main__':
             '/': operator.truediv,
             '**': operator.pow,
         }
-
-        return float(operator_list[user_lst[1]](user_lst[0], user_lst[2]))
+        try:
+            op_result = float(operator_list[user_lst[1]](user_lst[0], user_lst[2]))
+            return op_result
+        except ZeroDivisionError:
+            print(f'\nDivision by zero is forbidden, please repeat input')
+            return 'error'
+        except KeyError:
+            print(f'\nEntered wrong operator, please repeat input')
+            return 'error'
 
     def user_input():
         ''' This function take input from user, check it for correct format and for stop word "exit". If user string format correct, then return user string, if not check for stop word if user string contain only stop word in any register program will stop, if not it wil ask to repeat input again  '''
@@ -73,20 +80,9 @@ if __name__ == '__main__':
         user_list = user_string.split()
         try:
             n1 = float(user_list[0])
-            check_1 = 'good'
-        except ValueError:
-            check_1 = 'bad'
-
-        try:
             n2 = float(user_list[2])
-            check_2 = 'good'
-        except ValueError:
-            check_2 = 'bad'
-
-        if check_1 == 'good' and check_2 == 'good':
-
             return [n1, user_list[1], n2]
-        else:
+        except ValueError:
             print(f'\nYou are entered something wrong, please try again')
             return 'false_list'
 
@@ -102,7 +98,11 @@ if __name__ == '__main__':
             if user_list == 'false_list':
                 continue
             else:
-                print(operations(user_list))
+                op_result = operations(user_list)
+                if op_result == 'error':
+                    continue
+                else:
+                    print(f'\nResult of operation is {op_result}')
 
 
 
