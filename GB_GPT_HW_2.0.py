@@ -33,3 +33,56 @@ o	неизвестная операция.
 *
 '''
 
+
+
+import operator
+import re
+
+
+def operations(n1, op, n2):
+
+
+    operator_list = {
+        '+': operator.add,
+        '-': operator.sub,
+        '*': operator.mul,
+        '/': operator.truediv,
+        '**': operator.pow,
+    }
+
+    pass
+
+
+
+
+test_string = '4 + 3*2 - 5 + 20 * 22 / 5 ** 2 - 2 ** 0.5'
+
+test_list = test_string.split()
+
+''' ['4', '+', '3*2', '-', '5', '+', '20', '*', '22', '/', '5', '**', '2', '-', '2', '**', '0.5'] '''
+
+print(test_list)
+
+while True: #For / operation!
+
+    if test_list.count('/') > 0:
+        ind_n1 = test_list.index('/') - 1
+        ind_op = test_list.index('/')
+        ind_n2 = test_list.index('/') + 1
+
+        n1 = test_list[ind_n1]
+        op = test_list[ind_op]
+        n2 = test_list[ind_n2]
+
+        result_numb = operations(n1, op, n2)
+
+        test_list.pop(ind_n1)
+        test_list.pop(ind_n1)
+        test_list.pop(ind_n1)
+
+        test_list.insert(ind_n1, result_numb)
+
+        continue
+
+    else:
+        break
