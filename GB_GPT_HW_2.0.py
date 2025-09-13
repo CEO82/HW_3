@@ -63,8 +63,9 @@ if __name__ == '__main__':
         while True:
             user_string = input(f'\nPlease enter expression in format:'
                                 f'\nnumber space operator space number,'
+                                f'\nbut without brackets'
                                 f'\nas example'
-                                f'\n5 + 3: ')
+                                f'\n5 + 3 * 4 -2 ** 2 / 3: ')
 
             if re.fullmatch(r'-?\d+\.?\d* (\+|-|/|\*{0,2}) -?\d+\.?\d*', user_string):
                 return user_string
